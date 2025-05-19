@@ -5,6 +5,9 @@ using UnityEngine;
 public class CarMovementScript : MonoBehaviour
 {
     private int line = 2;
+    private float smoothTime = 0.1f;
+    public Vector3 carPosition;
+    private Vector3 velocity = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -23,18 +26,20 @@ public class CarMovementScript : MonoBehaviour
         {
             line++;
         }
-        
+
         switch (line)
         {
-            case 1: 
-                transform.position = new Vector3(-4.5f, 1.7f, -14f);
+            case 1:
+                carPosition = new Vector3(-4.5f, 1.7f, -14f);
                 break;
-            case 2: 
-                transform.position = new Vector3(0f, 1.7f, -14f);
+            case 2:
+                carPosition = new Vector3(0f, 1.7f, -14f);
                 break;
-            case 3: 
-                transform.position = new Vector3(4.5f, 1.7f, -14f);
+            case 3:
+                carPosition = new Vector3(4.5f, 1.7f, -14f);
                 break;
-        }            
+        }
+
+        transform.position = Vector3.SmoothDamp(transform.position, carPosition, ref velocity, smoothTime);            
     }
 }

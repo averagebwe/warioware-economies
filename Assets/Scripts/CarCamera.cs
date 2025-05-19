@@ -5,7 +5,7 @@ using UnityEngine;
 public class CarCamera : MonoBehaviour
 {
     private Vector3 offset = new Vector3(0f, 4.2f, -2f);
-    private float smoothTime = 0.25f;
+    private float smoothTime = 0.1f;
     private Vector3 velocity = Vector3.zero;
 
     [SerializeField] private Transform target;
