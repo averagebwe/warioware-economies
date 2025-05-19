@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArrowCamera : MonoBehaviour
 {
-    private Vector3 offset = new Vector3(2.9f, 3.1f, -6f);
+    private Vector3 offset = new Vector3(-0.4f, 3.1f, -6f);
     private float smoothTime = 0.25f;
     private Vector3 velocity = Vector3.zero;
 

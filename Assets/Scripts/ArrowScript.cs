@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ArrowScript : MonoBehaviour
 {
+    public GameObject conditionManager;
+    private float completionTime = 17f;
     public Rigidbody2D arrowRigidbody;
     private float speed = 2f;
     private float vel = 2f;
@@ -13,7 +15,7 @@ public class ArrowScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -30,5 +32,21 @@ public class ArrowScript : MonoBehaviour
 
         transform.rotation = Quaternion.Slerp(transform.rotation, noInputs, Time.deltaTime * smooth);
         transform.position += Vector3.right * speed * Time.deltaTime;
+
+        if (Time.time > completionTime)
+        {
+            conditionManager.GetComponent<ResultScript>().ShowLose("<mark=#000000ff>ОБВАЛ АКЦИЙ<mark>");
+            Time.timeScale = 0;
+        }
+    }
+    
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Finish"))
+        {
+            conditionManager.GetComponent<ResultScript>().ShowWin("<mark=#000000ff>УСПЕХ<mark>");
+            Time.timeScale = 0;          
+        }
     }
 }
