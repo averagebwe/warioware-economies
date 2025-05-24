@@ -5,7 +5,6 @@ using UnityEngine;
 public class ArrowScript : MonoBehaviour
 {
     public GameObject conditionManager;
-    private float completionTime = 17f;
     public Rigidbody2D arrowRigidbody;
     private float speed = 2f;
     private float vel = 2f;
@@ -32,12 +31,6 @@ public class ArrowScript : MonoBehaviour
 
         transform.rotation = Quaternion.Slerp(transform.rotation, noInputs, Time.deltaTime * smooth);
         transform.position += Vector3.right * speed * Time.deltaTime;
-
-        if (Time.time > completionTime)
-        {
-            conditionManager.GetComponent<ResultScript>().ShowLose("<mark=#000000ff>ОБВАЛ АКЦИЙ<mark>");
-            Time.timeScale = 0;
-        }
     }
     
 

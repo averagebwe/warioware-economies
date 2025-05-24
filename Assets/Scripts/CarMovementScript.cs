@@ -30,13 +30,13 @@ public class CarMovementScript : MonoBehaviour
         switch (line)
         {
             case 1:
-                carPosition = new Vector3(-4.5f, 1.7f, -14f);
+                carPosition = new Vector3(-4.5f, 1f, -14f);
                 break;
             case 2:
-                carPosition = new Vector3(0f, 1.7f, -14f);
+                carPosition = new Vector3(0f, 1f, -14f);
                 break;
             case 3:
-                carPosition = new Vector3(4.5f, 1.7f, -14f);
+                carPosition = new Vector3(4.5f, 1f, -14f);
                 break;
         }
 
