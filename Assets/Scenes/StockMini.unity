@@ -264,7 +264,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 251455814}
-  - {fileID: 925033389}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -280,7 +279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24f2aacb99bc7f645bfceeba127853f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stockFinish: {fileID: 925033388}
 --- !u!1 &764843732
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,6 +788,7 @@ GameObject:
   - component: {fileID: 925033389}
   - component: {fileID: 925033391}
   - component: {fileID: 925033390}
+  - component: {fileID: 925033392}
   m_Layer: 0
   m_Name: stocks-finish
   m_TagString: Finish
@@ -805,12 +804,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 925033388}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20.5, y: -6.95, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 2}
+  m_LocalPosition: {x: 7.7799997, y: 6.475, z: -3}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 349227033}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &925033390
 BoxCollider2D:
@@ -890,6 +889,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &925033392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925033388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01b6e6b9fc795f24c8e0fa3eb61fbc5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &972073418
 GameObject:
   m_ObjectHideFlags: 0
