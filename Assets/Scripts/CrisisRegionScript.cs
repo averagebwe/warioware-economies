@@ -4,24 +4,31 @@ using UnityEngine;
 
 public class CrisisRegionScript : MonoBehaviour
 {
-    public GameObject conditionManager; 
+    private GameObject controller;
+    public GameObject conditionManager;
+    private float transitionTimer;
 
-    // Start is called before the first frame update
+
     void Start()
     {
+        controller = GameObject.FindWithTag("GameController");
         GetComponent<BoxCollider2D>().enabled = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    
 
     private void OnMouseDown()
     {
         conditionManager.GetComponent<ResultScript>().ShowWin("<mark=#000000ff>ДЕФОЛТ!<mark>");
         Time.timeScale = 0;
+        StartCoroutine(LoadAfterDelay());
+    }
+
+    IEnumerator LoadAfterDelay()
+    {
+        yield return new WaitForSecondsRealtime(2);
+        Time.timeScale = 1;
+        controller.GetComponent<SceneController>().groupCounter++;
+        controller.GetComponent<GroupCompletionCheck>().CheckCompletion();
+        controller.GetComponent<SceneController>().LoadMini();
     }
 }

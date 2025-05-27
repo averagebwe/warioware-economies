@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SectionTriggerScript : MonoBehaviour
 {
+    private GameObject controller;
     public GameObject[] roadPrefabs;
     public GameObject conditionManager;
     [SerializeField] RushFinishScript rushFinish;
@@ -11,6 +12,8 @@ public class SectionTriggerScript : MonoBehaviour
 
     void Start()
     {
+        controller = GameObject.FindWithTag("GameController");
+
         foreach (GameObject section in roadPrefabs)
         {
             section.SetActive(false);
@@ -32,7 +35,8 @@ public class SectionTriggerScript : MonoBehaviour
         if (other.gameObject.CompareTag("Finish"))
         {
             conditionManager.GetComponent<ResultScript>().ShowWin("<mark=#000000ff>ДОЕХАЛ ДО БАНКА<mark>");
-            Time.timeScale = 0;          
+            Time.timeScale = 0;
+            StartCoroutine(LoadAfterDelay());
         }
 
         if (other.gameObject.CompareTag("Obstacle"))
@@ -40,5 +44,15 @@ public class SectionTriggerScript : MonoBehaviour
             conditionManager.GetComponent<ResultScript>().ShowLose("<mark=#000000ff>НЕ ДОЕХАЛ<mark>");
             Time.timeScale = 0;
         }
+    }
+    
+
+    IEnumerator LoadAfterDelay()
+    {
+        yield return new WaitForSecondsRealtime(2);
+        Time.timeScale = 1;
+        controller.GetComponent<SceneController>().groupCounter++;
+        controller.GetComponent<GroupCompletionCheck>().CheckCompletion();
+        controller.GetComponent<SceneController>().LoadMini();
     }
 }

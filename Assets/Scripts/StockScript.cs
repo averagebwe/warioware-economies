@@ -15,7 +15,7 @@ public class StockScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > completionTime)
+        if (Time.deltaTime > completionTime)
         {
             conditionManager.GetComponent<ResultScript>().ShowLose("<mark=#000000ff>ОБВАЛ АКЦИЙ<mark>");
             Time.timeScale = 0;

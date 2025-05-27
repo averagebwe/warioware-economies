@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ArrowScript : MonoBehaviour
 {
+    private GameObject controller;
     public GameObject conditionManager;
     public Rigidbody2D arrowRigidbody;
     private float speed = 2f;
@@ -14,7 +15,7 @@ public class ArrowScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        controller = GameObject.FindWithTag("GameController");
     }
 
     // Update is called once per frame
@@ -32,14 +33,24 @@ public class ArrowScript : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, noInputs, Time.deltaTime * smooth);
         transform.position += Vector3.right * speed * Time.deltaTime;
     }
-    
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Finish"))
         {
             conditionManager.GetComponent<ResultScript>().ShowWin("<mark=#000000ff>УСПЕХ<mark>");
-            Time.timeScale = 0;          
+            Time.timeScale = 0;
+            StartCoroutine(LoadAfterDelay());
         }
+    }
+
+    IEnumerator LoadAfterDelay()
+    {
+        yield return new WaitForSecondsRealtime(2);
+        Time.timeScale = 1;
+        controller.GetComponent<SceneController>().groupCounter++;
+        controller.GetComponent<GroupCompletionCheck>().CheckCompletion();
+        controller.GetComponent<SceneController>().LoadMini();
     }
 }
