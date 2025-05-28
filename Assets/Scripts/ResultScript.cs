@@ -5,8 +5,8 @@ using TMPro;
 
 public class ResultScript : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI winText;
-    [SerializeField] TextMeshProUGUI loseText;
+    [SerializeField] public TextMeshProUGUI winText;
+    [SerializeField] public TextMeshProUGUI loseText;
 
     void Start()
     {

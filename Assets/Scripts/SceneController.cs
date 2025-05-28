@@ -7,15 +7,15 @@ public class SceneController : MonoBehaviour
 {
     public List<int> minigamesBuildIndexList = new List<int>();
     public List<int> shuffledList = new List<int>();
-    public int passedGames, groupCounter;
+    public int playedGames, passedGames, groupCounter;
+    public int gameFails;
 
     void Awake()
     {
-        for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++)
+        for (int i = 3; i < SceneManager.sceneCountInBuildSettings; i++)
         {
             minigamesBuildIndexList.Add(i);
         }
-        Debug.Log(minigamesBuildIndexList.Count);
         shuffledList = minigamesBuildIndexList;
         DontDestroyOnLoad(this.gameObject);
     }
@@ -23,6 +23,8 @@ public class SceneController : MonoBehaviour
 
     void Start()
     {
+        gameFails = 0;
+        playedGames = 0;
         passedGames = 0;
         groupCounter = 0;
         Shuffle();
@@ -32,7 +34,12 @@ public class SceneController : MonoBehaviour
 
     public void LoadMini()
     {
-        SceneManager.LoadScene(shuffledList[groupCounter]);
+        Debug.Log(gameFails);
+        if (gameFails < 3)
+            SceneManager.LoadScene(shuffledList[groupCounter]);
+        else if (gameFails >= 3)
+            SceneManager.LoadScene("GameOver");
+            
     }
 
     // Fisher-Yates shuffle algorithm

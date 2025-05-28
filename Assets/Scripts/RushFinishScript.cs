@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class RushFinishScript : MonoBehaviour
 {
+    [SerializeField] RoadMovementScript roadMovementScript;
     public int passedSectionsCounter = 0;
-    private int sectionsNeeded = 5;
+    private int sectionsNeeded;
     private float speed = 0f;
     // Start is called before the first frame update
     void Start()
     {
+        sectionsNeeded = Random.Range(10, 20);
     }
 
     // Update is called once per frame
@@ -23,7 +25,7 @@ public class RushFinishScript : MonoBehaviour
     {
         if (passedSectionsCounter == sectionsNeeded)
         {
-            speed = 15f;
+            speed = roadMovementScript.roadSpeed;
         }
     }
 }

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class WorldCrisisScript : MonoBehaviour
 {
-    public GameObject conditionManager; 
-    private float colorTimeChange = 2f;
+    private GameObject controller;
+    public GameObject conditionManager;
+    private float colorTimeChange;
     private float timer;
     private float crisisDelay;
     private bool crisisOccur = false;
@@ -16,6 +17,10 @@ public class WorldCrisisScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        controller = GameObject.FindWithTag("GameController");
+        colorTimeChange = 3 - (controller.GetComponent<SceneController>().playedGames / controller.GetComponent<SceneController>().minigamesBuildIndexList.Count) * 0.3f;
+        if (colorTimeChange < 0.3f)
+            colorTimeChange = 0.3f;
         crisisRegion = regions[Random.Range(0, regions.Length)];
         crisisRegionRenderer = crisisRegion.GetComponent<SpriteRenderer>();
         crisisDelay = Random.Range(7f, 15f);
@@ -35,6 +40,7 @@ public class WorldCrisisScript : MonoBehaviour
         {
             conditionManager.GetComponent<ResultScript>().ShowLose("<mark=#000000ff>МИРОВОЙ КРИЗИС<mark>");
             Time.timeScale = 0;
+            StartCoroutine(LoadAfterDelay());
         }
     }
 
@@ -49,5 +55,19 @@ public class WorldCrisisScript : MonoBehaviour
         yield return new WaitForSeconds(delay);
         crisisRegion.GetComponent<BoxCollider2D>().enabled = true;
         crisisOccur = true;
+    }
+    
+    IEnumerator LoadAfterDelay()
+    {
+        yield return new WaitForSecondsRealtime(2);
+        Time.timeScale = 1;
+        if (conditionManager.GetComponent<ResultScript>().winText.enabled == true)
+            controller.GetComponent<SceneController>().passedGames++;
+        else
+            controller.GetComponent<SceneController>().gameFails++;
+        controller.GetComponent<SceneController>().playedGames++;
+        controller.GetComponent<SceneController>().groupCounter++;
+        controller.GetComponent<GroupCompletionCheck>().CheckCompletion();
+        controller.GetComponent<SceneController>().LoadMini();
     }
 }

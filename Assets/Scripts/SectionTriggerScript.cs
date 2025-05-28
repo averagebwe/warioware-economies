@@ -43,6 +43,7 @@ public class SectionTriggerScript : MonoBehaviour
         {
             conditionManager.GetComponent<ResultScript>().ShowLose("<mark=#000000ff>НЕ ДОЕХАЛ<mark>");
             Time.timeScale = 0;
+            StartCoroutine(LoadAfterDelay());
         }
     }
     
@@ -51,6 +52,11 @@ public class SectionTriggerScript : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(2);
         Time.timeScale = 1;
+        if (conditionManager.GetComponent<ResultScript>().winText.enabled == true)
+            controller.GetComponent<SceneController>().passedGames++;
+        else
+            controller.GetComponent<SceneController>().gameFails++;
+        controller.GetComponent<SceneController>().playedGames++;
         controller.GetComponent<SceneController>().groupCounter++;
         controller.GetComponent<GroupCompletionCheck>().CheckCompletion();
         controller.GetComponent<SceneController>().LoadMini();

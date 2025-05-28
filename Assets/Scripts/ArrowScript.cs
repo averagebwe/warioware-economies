@@ -49,6 +49,11 @@ public class ArrowScript : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(2);
         Time.timeScale = 1;
+        if (conditionManager.GetComponent<ResultScript>().winText.enabled == true)
+            controller.GetComponent<SceneController>().passedGames++;
+        else
+            controller.GetComponent<SceneController>().gameFails++;
+        controller.GetComponent<SceneController>().playedGames++;
         controller.GetComponent<SceneController>().groupCounter++;
         controller.GetComponent<GroupCompletionCheck>().CheckCompletion();
         controller.GetComponent<SceneController>().LoadMini();
