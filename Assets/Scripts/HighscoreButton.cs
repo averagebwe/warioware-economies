@@ -10,7 +10,8 @@ public class HighscoreButton : MonoBehaviour
     public void GoToMainMenu()
     {
         controller = GameObject.FindWithTag("GameController");
-        score = controller.GetComponent<SceneController>.passedGames;
+        score = controller.GetComponent<SceneController>().passedGames;
+        Destroy(controller);
         SceneManager.LoadScene("MainMenu");
     }
 }
