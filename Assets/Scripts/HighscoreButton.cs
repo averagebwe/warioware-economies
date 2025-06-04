@@ -5,12 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class HighscoreButton : MonoBehaviour
 {
-    private GameObject controller;
+    private GameObject controller, addUI;
     private int score;
     public void GoToMainMenu()
     {
+        addUI = GameObject.FindWithTag("AdditionalUI");
         controller = GameObject.FindWithTag("GameController");
-        score = controller.GetComponent<SceneController>().passedGames;
+        Destroy(addUI);
         Destroy(controller);
         SceneManager.LoadScene("MainMenu");
     }

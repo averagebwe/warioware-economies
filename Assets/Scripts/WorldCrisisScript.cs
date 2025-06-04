@@ -36,8 +36,10 @@ public class WorldCrisisScript : MonoBehaviour
             ChangeColors(timer);
         }
 
-        if (crisisRegionRenderer.color == Color.red)
+        if (timer >= colorTimeChange)
         {
+            crisisOccur = false;
+            timer = 0;
             conditionManager.GetComponent<ResultScript>().ShowLose("<mark=#000000ff>МИРОВОЙ КРИЗИС<mark>");
             Time.timeScale = 0;
             StartCoroutine(LoadAfterDelay());
@@ -64,7 +66,7 @@ public class WorldCrisisScript : MonoBehaviour
         if (conditionManager.GetComponent<ResultScript>().winText.enabled == true)
             controller.GetComponent<SceneController>().passedGames++;
         else
-            controller.GetComponent<SceneController>().gameFails++;
+            controller.GetComponent<SceneController>().gameFails += 1;
         controller.GetComponent<SceneController>().playedGames++;
         controller.GetComponent<SceneController>().groupCounter++;
         controller.GetComponent<GroupCompletionCheck>().CheckCompletion();

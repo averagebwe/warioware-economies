@@ -8,6 +8,7 @@ public class StockScript : MonoBehaviour
     private GameObject controller;
     public GameObject conditionManager;
     private float completionTime;
+    private bool elapsedReset = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +22,12 @@ public class StockScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        elapsedTime += Time.deltaTime;
+        if (elapsedReset is false)
+            elapsedTime += Time.deltaTime;
         if (elapsedTime > completionTime)
         {
+            elapsedReset = true;
+            elapsedTime = 0;
             FailStock();
         }
     }

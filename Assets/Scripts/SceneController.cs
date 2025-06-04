@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class SceneController : MonoBehaviour
 {
     public List<int> minigamesBuildIndexList = new List<int>();
     public List<int> shuffledList = new List<int>();
-    public int playedGames, passedGames, groupCounter;
-    public int gameFails;
+    public int playedGames, passedGames, groupCounter, gameFails;
+    private int lifes;
+    public bool initialCheck = false;
+    [SerializeField] public TextMeshProUGUI lifesText;
 
     void Awake()
     {
@@ -29,17 +32,18 @@ public class SceneController : MonoBehaviour
         groupCounter = 0;
         Shuffle();
         LoadMini();
+        initialCheck = true;
     }
 
 
     public void LoadMini()
     {
-        Debug.Log(gameFails);
-        if (gameFails < 3)
+        lifes = 3 - gameFails;
+        if (lifes > 0)
             SceneManager.LoadScene(shuffledList[groupCounter]);
-        else if (gameFails >= 3)
+        else
             SceneManager.LoadScene("GameOver");
-            
+        lifesText.text = "<mark=#000000ff>Жизни:<mark>" + lifes.ToString();
     }
 
     // Fisher-Yates shuffle algorithm
