@@ -1,0 +1,3 @@
+abwe;15
+kilo;32
+delta;21

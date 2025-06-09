@@ -9,6 +9,8 @@ TagManager:
   - Boundary
   - Obstacle
   - AdditionalUI
+  - Nickname
+  - ScoreManager
   layers:
   - Default
   - TransparentFX
